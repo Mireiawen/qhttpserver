@@ -3,17 +3,13 @@ TARGET = bodydata
 QT += network
 QT -= gui
 
-CONFIG += debug
+CONFIG += debug_and_release
 
 INCLUDEPATH += ../../src
 LIBS += -L../../lib
 
-win32 {
-    debug: LIBS += -lqhttpserverd
-    else: LIBS += -lqhttpserver
-} else {
-    LIBS += -lqhttpserver
-}
+CONFIG(debug, debug|release): LIBS += -lqhttpserverd
+CONFIG(release, debug|release): LIBS += -lqhttpserver
 
 SOURCES = bodydata.cpp
 HEADERS = bodydata.h
